@@ -3,8 +3,6 @@ package dev.ifrs.backendclients;
 import java.util.List;
 
 import javax.annotation.security.PermitAll;
-import javax.annotation.security.RolesAllowed;
-import javax.transaction.Transactional;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.FormParam;
@@ -19,7 +17,6 @@ import javax.ws.rs.core.MediaType;
 import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
 
 import dev.ifrs.model.Usuario;
-import io.quarkus.oidc.token.propagation.AccessToken;
 
 @RegisterRestClient(baseUri = "http://localhost:8084/usuario")
 public interface UsuarioBC {

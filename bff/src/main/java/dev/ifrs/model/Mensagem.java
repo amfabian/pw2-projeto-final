@@ -3,11 +3,11 @@ package dev.ifrs.model;
 public class Mensagem {
     private Long id;
     private String texto;
-    private String user_id;
-    public Mensagem(Long id, String texto, String user_id) {
+    private String userId;
+    public Mensagem(Long id, String texto, String userId) {
         this.id = id;
         this.texto = texto;
-        this.user_id = user_id;
+        this.userId = userId;
     }
     public Mensagem() {
     }
@@ -24,10 +24,10 @@ public class Mensagem {
         this.texto = texto;
     }
     public String getUser_id() {
-        return user_id;
+        return userId;
     }
-    public void setUser_id(String user_id) {
-        this.user_id = user_id;
+    public void setUser_id(String userId) {
+        this.userId = userId;
     }
     
 }

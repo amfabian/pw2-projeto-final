@@ -1,6 +1,7 @@
 package dev.ifrs;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
@@ -14,9 +15,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.SecurityContext;
 
 import org.eclipse.microprofile.jwt.Claim;
 import org.eclipse.microprofile.jwt.Claims;
@@ -29,7 +28,10 @@ import dev.ifrs.model.Usuario;
 
 @Path("/bff/usuario")
 public class UsuarioBFF {
-            
+
+    private static final Logger LOGGER = Logger.getLogger(UsuarioBFF.class.getName());
+    String message;
+           
     @Inject
     JsonWebToken jwt;
 
@@ -81,13 +83,13 @@ public class UsuarioBFF {
         
         List <Usuario> users = usuariobc.list();
         for(Usuario user : users){
-            System.out.println("Lista de usuarios: "+user.getLogin());
+            LOGGER.info("Lista de usuarios: "+user.getLogin());
             if(user.getLogin().equals(name) && user.getPassword().equals(password)){
                 if(user.isAdmin()){
-                    System.out.println("usuario admin: "+user.getLogin());
+                    LOGGER.info("usuario admin: "+user.getLogin());
                 return loginBC.getADMIN(user.getLogin(), user.getEmail());
                 } else {
-                    System.out.println("usuario certo: "+user.getLogin());
+                    LOGGER.info("usuario admin: "+user.getLogin());
                     return loginBC.getJWT(user.getLogin(), user.getEmail());
             }
             }
@@ -98,9 +100,9 @@ public class UsuarioBFF {
     @Path("/delete/{id}")
     @RolesAllowed({"Admin"})
     public void delete(@PathParam("id") Long id){
-        System.out.println("BFF DELETE INICIO ");
         usuariobc.delete(id);
-        System.out.println("BFF DELETE OK ");
+        message = "User deletado " + id.toString();
+        LOGGER.fine(message);
 
     }
 
