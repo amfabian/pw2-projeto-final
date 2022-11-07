@@ -27,7 +27,12 @@ jobs:
         java-version: '11'
         distribution: 'temurin'
         cache: maven
-    - name: Build with Maven
+    - name: Build with Maven auth-user
       run: | 
         cd auth-user/
+        ./mvnw verify
+        cd ..
+    - name: Build with Maven pw2-manga-api
+      run: |     
+        cd pw2-manga-api/
         ./mvnw verify
